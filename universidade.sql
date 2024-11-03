@@ -19,13 +19,14 @@ CREATE TABLE aluno_curso(
     id_curso VARCHAR(30),
 
     FOREIGN KEY (id_aluno) REFERENCES aluno(cpf),
-    FOREIGN KEY (id_curso) REFERENCES curso(nome)
+    FOREIGN KEY (id_curso) REFERENCES curso(nome),
+    PRIMARY KEY (id_aluno, id_curso)
 );
 
 CREATE TABLE professor(
     cpf VARCHAR(11) PRIMARY KEY,
     nome VARCHAR(50),
-    matricula VARCHAR(7),
+    matricula VARCHAR(7) UNIQUE,
     cep VARCHAR(8),
     numero VARCHAR(6),
     titulacao VARCHAR(15),
@@ -45,7 +46,7 @@ CREATE TABLE turma(
 CREATE TABLE semestre(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     ano VARCHAR(4),
-    digito VARCHAR(1)
+    digito VARCHAR(1) CHECK (digito IN ('1', '2'))
 );
 
 CREATE TABLE disciplina(
